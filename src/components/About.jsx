@@ -29,6 +29,7 @@ const About = () => {
                                 alt="Industrial Facility"
                                 className="w-full object-cover"
                                 style={{ height: '600px' }}
+                                loading="lazy"
                             />
                         </div>
                         {/* Experience Badge */}

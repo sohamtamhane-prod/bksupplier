@@ -8,17 +8,33 @@ const Navbar = () => {
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
   useEffect(() => {
+    let scrollTimeout;
+    let resizeTimeout;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => {
+        setIsScrolled(window.scrollY > 20);
+        scrollTimeout = null;
+      }, 100);
     };
+
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      if (resizeTimeout) return;
+      resizeTimeout = setTimeout(() => {
+        setWindowWidth(window.innerWidth);
+        resizeTimeout = null;
+      }, 100);
     };
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
     };
   }, []);
 

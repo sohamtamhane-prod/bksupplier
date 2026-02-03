@@ -52,8 +52,8 @@ const Hero = () => {
                 <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 50%)' }} />
             </div>
 
-            {/* Animated floating particles */}
-            {[...Array(6)].map((_, i) => (
+            {/* Animated floating particles - Reduced for performance */}
+            {[...Array(3)].map((_, i) => (
                 <motion.div
                     key={i}
                     className="absolute rounded-full bg-blue-400 pointer-events-none"
@@ -90,19 +90,12 @@ const Hero = () => {
                         variants={itemVariants}
                     >
                         Premium Aluminum <br className="hidden md-block" />
-                        <motion.span
+                        <span
                             className="text-blue-500"
-                            animate={{
-                                textShadow: [
-                                    '0 0 20px rgba(59, 130, 246, 0.5)',
-                                    '0 0 40px rgba(59, 130, 246, 0.8)',
-                                    '0 0 20px rgba(59, 130, 246, 0.5)',
-                                ],
-                            }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
                         >
                             Foil Solutions
-                        </motion.span>{' '}
+                        </span>{' '}
                         For Global Industries
                     </motion.h1>
 

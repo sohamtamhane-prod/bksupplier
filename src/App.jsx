@@ -1,39 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Products from './components/Products';
-import Machinery from './components/Machinery';
-import Quality from './components/Quality';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+
+// Lazy load components that are below the fold
+const About = lazy(() => import('./components/About'));
+const Products = lazy(() => import('./components/Products'));
+const Machinery = lazy(() => import('./components/Machinery'));
+const Quality = lazy(() => import('./components/Quality'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div style={{ minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ width: '40px', height: '40px', border: '4px solid #f3f4f6', borderTop: '4px solid #004d99', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+  </div>
+);
 
 function App() {
-  useEffect(() => {
-    // Smooth scroll for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  }, []);
-
   return (
     <div className="w-full" style={{ position: 'relative' }}>
       <Navbar />
       <Hero />
-      <About />
-      <Products />
-      <Machinery />
-      <Quality />
-      <Contact />
-      <Footer />
+      <Suspense fallback={<LoadingFallback />}>
+        <About />
+        <Products />
+        <Machinery />
+        <Quality />
+        <Contact />
+        <Footer />
+      </Suspense>
     </div>
   );
 }

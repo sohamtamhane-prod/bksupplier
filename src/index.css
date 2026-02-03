@@ -21,6 +21,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-main);
   background-color: var(--light);
@@ -51,7 +55,7 @@ h6 {
     url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .glass-card {
@@ -788,5 +792,16 @@ h6 {
 
   .md-w-fit {
     width: fit-content;
+  }
+}
+
+/* Keyframe animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

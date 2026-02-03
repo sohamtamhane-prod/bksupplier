@@ -79,6 +79,7 @@ const Products = () => {
                                     src={item.image}
                                     alt={item.title}
                                     className="w-full h-full object-cover transition-all"
+                                    loading="lazy"
                                 />
                                 <div className="absolute bg-white-90 backdrop-blur-md rounded-full flex items-center justify-center font-bold text-blue-600 shadow-md" style={{ top: '16px', right: '16px', width: '48px', height: '48px' }}>
                                     {item.id}
